@@ -1,42 +1,63 @@
 
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f5f1e8;
-    color: #333;
+    font-family: 'DM Sans', sans-serif;
+    background: #f7f5ef;
+    color: #303b30;
 }
 
 .contenedor {
-    max-width: 1000px;
+    max-width: 1150px;
     margin: auto;
-    padding: 30px 20px;
+    padding: 35px 25px;
 }
 
+/* ENCABEZADO */
+
 .encabezado {
+    background: #284b35;
+    color: #fffaf0;
+    padding: 65px 30px;
     text-align: center;
-    background-color: #386641;
-    color: white;
-    padding: 35px 20px;
-    border-radius: 12px;
-    margin-bottom: 30px;
+    border-radius: 18px;
+    margin-bottom: 35px;
 }
 
 .encabezado h1 {
-    margin: 0 0 10px;
-    font-size: 36px;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(35px, 5vw, 52px);
+    margin: 0 0 12px;
 }
+
+.encabezado p {
+    color: #e1e8d9;
+    font-size: 17px;
+}
+
+/* FORMULARIOS Y SECCIONES */
 
 .formulario-seccion,
 .recetas-seccion {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
     margin-bottom: 30px;
-    box-shadow: 0 3px 12px #00000012;
+    box-shadow: 0 5px 20px #263b2910;
+}
+
+.formulario-seccion h2,
+.recetas-seccion h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 27px;
+    color: #284b35;
+    margin-top: 0;
+    margin-bottom: 25px;
 }
 
 form {
@@ -45,61 +66,149 @@ form {
     gap: 12px;
 }
 
+label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #303b30;
+}
+
+/* CAMPOS DE ENTRADA */
+
 input,
 textarea,
 select {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 7px;
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #deded5;
+    border-radius: 9px;
+    font-family: 'DM Sans', sans-serif;
     font-size: 15px;
+    background-color: #ffffff;
+    color: #303b30;
+    outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #527d55;
+    box-shadow: 0 0 0 3px #527d551a;
+    color: #303b30;
+    background-color: #ffffff;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #888888;
+    opacity: 1;
 }
 
 textarea {
-    min-height: 100px;
+    min-height: 110px;
     resize: vertical;
 }
 
-button {
-    background-color: #386641;
-    color: white;
-    border: none;
-    padding: 13px;
-    border-radius: 7px;
+/* SELECTOR DE DIFICULTAD */
+
+select {
     cursor: pointer;
-    font-weight: bold;
+    color: #303b30;
+    background-color: #ffffff;
+}
+
+select option {
+    background-color: #ffffff;
+    color: #303b30;
+}
+
+select option:checked {
+    background-color: #e4ecdf;
+    color: #284b35;
+}
+
+/* BOTONES */
+
+button {
+    padding: 13px 18px;
+    border: none;
+    border-radius: 9px;
+    background: #386641;
+    color: #ffffff;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 button:hover {
-    background-color: #2d5034;
+    background: #284b35;
+    transform: translateY(-1px);
 }
+
+/* LISTADO DE RECETAS */
 
 .lista-recetas {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
 }
 
 .tarjeta-receta {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #fffdf8;
+    padding: 23px;
+    background: #fffdf8;
+    border: 1px solid #e9e5d9;
+    border-radius: 13px;
 }
 
 .tarjeta-receta h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
     color: #386641;
 }
 
-.boton-eliminar {
-    background-color: #b23a48;
+.tarjeta-receta p {
+    line-height: 1.6;
+    color: #656b61;
+}
+
+.tarjeta-receta button {
     width: 100%;
+    margin-top: 9px;
+}
+
+/* BOTÓN ELIMINAR */
+
+.boton-eliminar {
+    background: #a94c40;
+    color: #ffffff;
 }
 
 .boton-eliminar:hover {
-    background-color: #922d39;
+    background: #87382f;
 }
+
+/* MENSAJES */
 
 .error {
     color: #b23a48;
 }
+
+/* DISEÑO RESPONSIVE */
+
+@media (max-width: 600px) {
+    .contenedor {
+        padding: 18px 12px;
+    }
+
+    .encabezado {
+        padding: 45px 15px;
+    }
+
+    .formulario-seccion,
+    .recetas-seccion {
+        padding: 20px;
+    }
+}
+
+
 
