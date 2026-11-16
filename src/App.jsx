@@ -1,8 +1,10 @@
 
 import { useEffect, useState } from 'react';
+
 import {
     obtenerRecetas,
     crearReceta,
+    actualizarReceta,
     eliminarReceta
 } from './services/recetaService';
 
@@ -12,6 +14,7 @@ function App() {
     const [recetas, setRecetas] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState('');
+    const [editando, setEditando] = useState(null);
 
     const [formulario, setFormulario] = useState({
         nombre: '',
@@ -47,11 +50,18 @@ function App() {
     const manejarEnvio = async (e) => {
         e.preventDefault();
 
+        const datos = {
+            ...formulario,
+            tiempo_preparacion: Number(formulario.tiempo_preparacion)
+        };
+
         try {
-            await crearReceta({
-                ...formulario,
-                tiempo_preparacion: Number(formulario.tiempo_preparacion)
-            });
+            if (editando !== null) {
+                await actualizarReceta(editando, datos);
+                setEditando(null);
+            } else {
+                await crearReceta(datos);
+            }
 
             setFormulario({
                 nombre: '',
@@ -64,8 +74,32 @@ function App() {
 
         } catch (error) {
             console.error(error);
-            setError('No se pudo registrar la receta.');
+            setError('No se pudo guardar la receta.');
         }
+    };
+
+    const manejarEditar = (receta) => {
+        setEditando(receta.id);
+
+        setFormulario({
+            nombre: receta.nombre,
+            descripcion: receta.descripcion,
+            tiempo_preparacion: receta.tiempo_preparacion,
+            dificultad: receta.dificultad
+        });
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const cancelarEdicion = () => {
+        setEditando(null);
+
+        setFormulario({
+            nombre: '',
+            descripcion: '',
+            tiempo_preparacion: '',
+            dificultad: 'Facil'
+        });
     };
 
     const manejarEliminar = async (id) => {
@@ -91,7 +125,11 @@ function App() {
             </header>
 
             <section className="formulario-seccion">
-                <h2>Registrar una receta</h2>
+                <h2>
+                    {editando !== null
+                        ? 'Editar receta'
+                        : 'Registrar una receta'}
+                </h2>
 
                 <form onSubmit={manejarEnvio}>
 
@@ -101,7 +139,6 @@ function App() {
                         name="nombre"
                         value={formulario.nombre}
                         onChange={manejarCambio}
-                        placeholder="Ej. Sancocho de gallina"
                         required
                     />
 
@@ -110,7 +147,6 @@ function App() {
                         name="descripcion"
                         value={formulario.descripcion}
                         onChange={manejarCambio}
-                        placeholder="Describe la receta..."
                         required
                     />
 
@@ -136,8 +172,20 @@ function App() {
                     </select>
 
                     <button type="submit">
-                        Registrar receta
+                        {editando !== null
+                            ? 'Guardar cambios'
+                            : 'Registrar receta'}
                     </button>
+
+                    {editando !== null && (
+                        <button
+                            type="button"
+                            className="boton-eliminar"
+                            onClick={cancelarEdicion}
+                        >
+                            Cancelar edición
+                        </button>
+                    )}
 
                 </form>
             </section>
@@ -146,7 +194,6 @@ function App() {
                 <h2>Nuestras recetas</h2>
 
                 {cargando && <p>Cargando recetas...</p>}
-
                 {error && <p className="error">{error}</p>}
 
                 {!cargando && recetas.length === 0 && (
@@ -155,20 +202,26 @@ function App() {
 
                 <div className="lista-recetas">
                     {recetas.map((receta) => (
-                        <article className="tarjeta-receta" key={receta.id}>
+                        <article
+                            className="tarjeta-receta"
+                            key={receta.id}
+                        >
                             <h3>{receta.nombre}</h3>
-
                             <p>{receta.descripcion}</p>
-
                             <p>
                                 Tiempo: {receta.tiempo_preparacion} minutos
                             </p>
-
-                            <p>
-                                Dificultad: {receta.dificultad}
-                            </p>
+                            <p>Dificultad: {receta.dificultad}</p>
 
                             <button
+                                type="button"
+                                onClick={() => manejarEditar(receta)}
+                            >
+                                Editar
+                            </button>
+
+                            <button
+                                type="button"
                                 className="boton-eliminar"
                                 onClick={() => manejarEliminar(receta.id)}
                             >
@@ -184,5 +237,6 @@ function App() {
 }
 
 export default App;
+
 
 
