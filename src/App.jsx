@@ -8,6 +8,7 @@ import {
     eliminarReceta
 } from './services/recetaService';
 
+import Ingredientes from './components/Ingredientes';
 import './App.css';
 
 function App() {
@@ -230,8 +231,8 @@ function App() {
                         </article>
                     ))}
                 </div>
-            </section>
-
+            </section>          
+            <Ingredientes />       
         </main>
     );
 }
