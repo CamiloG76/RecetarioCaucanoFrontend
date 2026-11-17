@@ -1,0 +1,92 @@
+
+.ingredientes-seccion {
+    margin-top: 40px;
+    padding: 25px;
+}
+
+.ingredientes-seccion h2 {
+    text-align: center;
+    color: #5b3825;
+    margin-bottom: 25px;
+}
+
+.formulario-ingredientes {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    max-width: 600px;
+    margin: 0 auto 35px;
+}
+
+.formulario-ingredientes h3,
+.lista-ingredientes h3 {
+    color: #68452e;
+    margin-bottom: 20px;
+}
+
+.formulario-ingredientes form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formulario-ingredientes label {
+    font-weight: bold;
+    color: #444;
+}
+
+.formulario-ingredientes input,
+.formulario-ingredientes select {
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+.formulario-ingredientes button,
+.tarjeta-ingrediente button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 7px;
+    background-color: #668b4e;
+    color: white;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.formulario-ingredientes button:hover,
+.tarjeta-ingrediente button:hover {
+    background-color: #4e703b;
+}
+
+.tarjeta-ingrediente {
+    background-color: white;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 15px;
+}
+
+.tarjeta-ingrediente h4 {
+    color: #68452e;
+    margin-bottom: 10px;
+}
+
+.tarjeta-ingrediente p {
+    margin: 7px 0;
+}
+
+.ingredientes-seccion .boton-eliminar {
+    background-color: #c0392b;
+    margin-left: 8px;
+}
+
+.ingredientes-seccion .boton-eliminar:hover {
+    background-color: #922b21;
+}
+
+.lista-ingredientes {
+    max-width: 800px;
+    margin: auto;
+}
